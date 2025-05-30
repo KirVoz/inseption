@@ -13,7 +13,8 @@ RUN apk update && apk add --no-cache \
     php81-ctype \
     php81-phar \
     wget \
-    curl
+    curl \
+    mysql-client
 
 RUN sed -i 's|listen = 127.0.0.1:9000|listen = 0.0.0.0:9000|' /etc/php81/php-fpm.d/www.conf
 
@@ -42,4 +43,5 @@ RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 9000
 
-CMD ["sh", "-c", "/create-wp-users.sh && php-fpm81 -F"]
+CMD ["/create-wp-users.sh"]
+# CMD ["sh", "-c", "/create-wp-users.sh && php-fpm81 -F"]

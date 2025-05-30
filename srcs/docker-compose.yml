@@ -61,7 +61,17 @@ services:
 
 volumes:
   wp-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/wp-data
+      o: bind
   db-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/db-data
+      o: bind
 
 networks:
   inception:
