@@ -1,15 +1,17 @@
 #!/bin/sh
 
+SOCKET="/run/mysqld/mysqld.sock"
+
 if [ ! -d "/var/lib/mysql/mysql" ]; then
   echo "Initializing database..."
   mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
   echo "Starting temp server to apply init.sql..."
-  mysqld --user=mysql --skip-networking &
+  mysqld --user=mysql --skip-networking --socket=$SOCKET &
   pid="$!"
 
   echo "Waiting for MariaDB to be ready..."
-  until mysqladmin ping --silent; do
+  until mysqladmin --socket=$SOCKET ping --silent; do
     sleep 1
   done
 
@@ -23,10 +25,10 @@ FLUSH PRIVILEGES;
 EOF
 
   echo "Applying init.sql..."
-  mysql < /init.sql
+  mysql --socket=$SOCKET < /init.sql
 
   echo "Shutting down temp server..."
-  mysqladmin shutdown
+  mysqladmin --socket=$SOCKET shutdown
   wait "$pid"
 fi
 
