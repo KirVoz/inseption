@@ -16,7 +16,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
   done
 
   echo "Generating init.sql with variables..."
-  cat <<EOF > /init.sql
+  cat <<EOF > /tmp/init.sql
 CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;
 CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';
 GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'%';
