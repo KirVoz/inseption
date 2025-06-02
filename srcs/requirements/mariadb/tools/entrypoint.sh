@@ -25,7 +25,7 @@ FLUSH PRIVILEGES;
 EOF
 
   echo "Applying init.sql..."
-  mysql --socket=$SOCKET < /init.sql
+  mysql --socket=$SOCKET < /tmp/init.sql
 
   echo "Shutting down temp server..."
   mysqladmin --socket=$SOCKET shutdown
