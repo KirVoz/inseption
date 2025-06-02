@@ -19,6 +19,7 @@ services:
     image: mariadb
     restart: unless-stopped
     env_file: .env
+    
     volumes:
       - db-data:/var/lib/mysql
     # ports:
