@@ -41,8 +41,8 @@ services:
       - wp-data:/var/www/html
     networks:
       - inception
-    expose:
-      - "9000"
+    # expose:
+    # - "9000"
     env_file: .env
     environment:
       - WORDPRESS_DB_NAME=${DB_NAME}
