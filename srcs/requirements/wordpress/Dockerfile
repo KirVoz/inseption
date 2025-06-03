@@ -1,27 +1,29 @@
 FROM alpine:3.20
 
 RUN apk update && apk add --no-cache \
-    php81 \
-    php81-fpm \
-    php81-mysqli \
-    php81-session \
-    php81-json \
-    php81-opcache \
-    php81-dom \
-    php81-pdo \
-    php81-mbstring \
-    php81-ctype \
-    php81-phar \
+    php \
+    php-fpm \
+    php-mysqli \
+    php-session \
+    php-json \
+    php-opcache \
+    php-dom \
+    php-pdo \
+    php-mbstring \
+    php-ctype \
+    php-phar \
     wget \
     curl \
     mysql-client
 
-RUN sed -i 's|listen = 127.0.0.1:9000|listen = 0.0.0.0:9000|' /etc/php81/php-fpm.d/www.conf
+# RUN find /etc -name www.conf
 
-RUN echo 'env[WORDPRESS_DB_NAME] = $WORDPRESS_DB_NAME' >> /etc/php81/php-fpm.d/www.conf && \
-    echo 'env[WORDPRESS_DB_USER] = $WORDPRESS_DB_USER' >> /etc/php81/php-fpm.d/www.conf && \
-    echo 'env[WORDPRESS_DB_PASSWORD] = $WORDPRESS_DB_PASSWORD' >> /etc/php81/php-fpm.d/www.conf && \
-    echo 'env[WORDPRESS_DB_HOST] = $WORDPRESS_DB_HOST' >> /etc/php81/php-fpm.d/www.conf
+RUN sed -i 's|listen = 127.0.0.1:9000|listen = 0.0.0.0:9000|' /etc/php83/php-fpm.d/www.conf
+
+RUN echo 'env[WORDPRESS_DB_NAME] = $WORDPRESS_DB_NAME' >> /etc/php83/php-fpm.d/www.conf && \
+    echo 'env[WORDPRESS_DB_USER] = $WORDPRESS_DB_USER' >> /etc/php83/php-fpm.d/www.conf && \
+    echo 'env[WORDPRESS_DB_PASSWORD] = $WORDPRESS_DB_PASSWORD' >> /etc/php83/php-fpm.d/www.conf && \
+    echo 'env[WORDPRESS_DB_HOST] = $WORDPRESS_DB_HOST' >> /etc/php83/php-fpm.d/www.conf
 
 RUN addgroup -S www-data || true && adduser -S www-data -G www-data || true
 

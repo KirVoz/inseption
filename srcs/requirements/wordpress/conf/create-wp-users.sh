@@ -21,4 +21,4 @@ if ! wp user get "${WP_USER2_NAME}" --field=user_login --allow-root > /dev/null 
     wp user create "${WP_USER2_NAME}" "${WP_USER2_EMAIL}" --role=editor --user_pass="${WP_USER2_PASSWORD}" --allow-root
 fi
 
-php-fpm81 -F
+php-fpm8 -F
